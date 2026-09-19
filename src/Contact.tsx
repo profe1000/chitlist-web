@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
-import { Link } from 'react-router-dom'
 import {
-  ArrowRight, ChevronDown, Heart, Leaf, Mail, MapPin, Menu, MessageCircle,
-  Minus, Phone, Plus, Search, Send, Users, X,
+  ArrowRight, Heart, Leaf, Mail, MapPin, MessageCircle, Minus, Phone, Plus,
+  Send, Users,
 } from 'lucide-react'
+import SiteFooter from './components/SiteFooter'
+import SiteHeader from './components/SiteHeader'
 import './site.css'
 import './contact.css'
 
@@ -22,15 +23,9 @@ const faqs = [
   ['How can I join your team?', 'Send your CV to careers@chilist.ng and our people team will be in touch.'],
 ]
 
-function Brand({ light = false }: { light?: boolean }) {
-  return <Link to="/" className={`brand ${light ? 'text-white' : 'text-[#2a100b]'}`} aria-label="Chilist home"><span>Chilist</span><small>Good People. Brighter Days.</small></Link>
-}
-
 export default function Contact() {
-  const [menuOpen, setMenuOpen] = useState(false)
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [sent, setSent] = useState(false)
-  const [subscribed, setSubscribed] = useState(false)
 
   const submitMessage = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -40,12 +35,7 @@ export default function Contact() {
 
   return (
     <div className="site contact-page min-h-screen bg-[#fffaf2] text-[#321914]">
-      <div className="bg-[#2a160c] text-[#f8ead5]"><div className="page-shell flex h-8 items-center justify-between text-[10px] font-semibold sm:text-xs"><p className="flex items-center gap-2"><MapPin size={13} className="text-[#ffbd19]" /> Good People. Brighter Days.</p><div className="hidden gap-5 sm:flex"><Link to="/contact">Customer Support</Link><Link to="/#story">Careers</Link><Link to="/#testimonials">News & Updates</Link></div></div></div>
-
-      <header className="sticky top-0 z-40 border-b border-black/5 bg-[#fffaf2]/95 backdrop-blur">
-        <div className="page-shell flex h-19.5 items-center justify-between"><Brand /><nav className="hidden items-center gap-8 text-sm font-bold lg:flex" aria-label="Main navigation"><Link className="nav-link" to="/">Home</Link><Link className="nav-link flex items-center gap-1" to="/#services">Our Services <ChevronDown size={14} /></Link><Link className="nav-link" to="/#story">About Us</Link><Link className="nav-link" to="/#locations">Our Locations</Link><Link className="nav-link" to="/#impact">Sustainability</Link><Link className="nav-link active" to="/contact">Contact Us</Link></nav><div className="flex items-center gap-2"><button className="icon-button hidden sm:grid" aria-label="Search"><Search size={19} /></button><Link to="/#locations" className="primary-button hidden sm:flex"><MapPin size={17} fill="currentColor" /> Find a Location</Link><button className="icon-button grid lg:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">{menuOpen ? <X size={22} /> : <Menu size={22} />}</button></div></div>
-        {menuOpen && <nav className="page-shell flex flex-col gap-4 border-t border-black/10 py-5 text-sm font-bold lg:hidden"><Link to="/">Home</Link><Link to="/#services">Our Services</Link><Link to="/#story">About Us</Link><Link to="/#locations">Our Locations</Link><Link to="/#impact">Sustainability</Link><Link to="/contact">Contact Us</Link></nav>}
-      </header>
+      <SiteHeader page="contact" />
 
       <main>
         <section className="contact-hero"><div className="page-shell grid min-h-105 items-center lg:grid-cols-[.72fr_1.28fr]"><div className="relative z-10 py-14"><p className="eyebrow">Contact us</p><h1>We’re Here<br /><span>For You.</span></h1><p className="mt-5 max-w-sm text-lg leading-7 text-[#5f4d46]">Questions, feedback or enquiries? We’d love to hear from you. Our team is always ready to assist.</p><div className="mt-9 flex gap-7"><div className="contact-value"><Users /><span>People</span></div><div className="contact-value"><Heart /><span>Service</span></div><div className="contact-value"><Leaf /><span>Community</span></div></div></div><div className="contact-hero-photo" role="img" aria-label="Friendly customer support representative" /></div></section>
@@ -62,7 +52,7 @@ export default function Contact() {
         <section className="connect-band"><div className="page-shell grid min-h-44 items-center gap-8 py-8 lg:grid-cols-[1fr_.8fr]"><div /><div><h2>Let’s Stay Connected</h2><p>Follow us for the latest updates, offers and community stories.</p><div className="mt-4 flex gap-2"><span className="social"><Users size={16} /></span><span className="social"><Mail size={16} /></span><span className="social"><MessageCircle size={16} /></span></div></div></div></section>
       </main>
 
-      <footer className="bg-[#2a160c] text-[#f8ead5]"><div className="page-shell grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-[1.2fr_.8fr_.9fr_1.2fr]"><div><Brand light /><p className="mt-5 text-sm text-white/60">Good People. Brighter Days.</p></div><div className="footer-links"><h3>Quick Links</h3><Link to="/">Home</Link><Link to="/#story">About Us</Link><Link to="/#services">Our Services</Link><Link to="/contact">Contact Us</Link></div><div className="footer-links"><h3>Contact Info</h3><p>+234 803 123 4567</p><p>hello@chilist.ng</p><p>Warri, Delta State</p></div><div><h3 className="text-sm font-extrabold">Subscribe to Our Newsletter</h3><p className="mt-3 text-xs text-white/60">Get the latest news, offers and more.</p><form className="mt-4 flex overflow-hidden rounded-md bg-white/10" onSubmit={(event) => { event.preventDefault(); setSubscribed(true) }}><input required type="email" aria-label="Newsletter email" placeholder="Your email address" className="min-w-0 flex-1 bg-transparent px-4 py-3 text-xs text-white outline-none placeholder:text-white/45" /><button className="bg-[#ffc327] px-4 text-xs font-extrabold text-[#2a160c]">{subscribed ? 'Done!' : 'Subscribe'}</button></form></div></div><div className="page-shell flex justify-between border-t border-white/10 py-5 text-[11px] text-white/45"><p>© 2026 Chilist. All rights reserved.</p><p>Privacy Policy &nbsp; | &nbsp; Terms of Service</p></div></footer>
+      <SiteFooter page="contact" />
     </div>
   )
 }

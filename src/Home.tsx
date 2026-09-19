@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import {
-  ArrowLeft, ArrowRight, ChevronDown, Clock3, Fuel, Leaf, Mail,
-  MapPin, Menu, Play, Quote, Search, ShieldCheck, ShoppingBasket, Users,
-  Utensils, X,
+  ArrowLeft, ArrowRight, Clock3, Fuel, Leaf, MapPin, Play, Quote, Search,
+  ShieldCheck, ShoppingBasket, Users, Utensils, X,
 } from 'lucide-react'
+import SiteFooter from './components/SiteFooter'
+import SiteHeader from './components/SiteHeader'
 import './site.css'
 
 const services = [
@@ -27,14 +28,8 @@ const testimonials = [
   ['Consistent quality and excellent service. You can tell they care about their customers.', 'Tunde R.'],
 ]
 
-function Brand({ light = false }: { light?: boolean }) {
-  return <Link to="/" className={`brand ${light ? 'text-white' : 'text-[#2a100b]'}`} aria-label="Chilist home"><span>Chilist</span><small>Good People. Brighter Days.</small></Link>
-}
-
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false)
   const [storyOpen, setStoryOpen] = useState(false)
-  const [subscribed, setSubscribed] = useState(false)
   const servicesRef = useRef<HTMLDivElement>(null)
   const { hash } = useLocation()
 
@@ -50,16 +45,7 @@ export default function Home() {
 
   return (
     <div className="site min-h-screen overflow-x-hidden bg-[#fffaf2] text-[#321914]">
-      <div className="bg-[#2a160c] text-[#f8ead5]"><div className="page-shell flex h-8 items-center justify-between text-[10px] font-semibold sm:text-xs"><p className="flex items-center gap-2"><MapPin size={13} className="text-[#ffbd19]" /> Open daily, serving our community with pride</p><div className="hidden items-center gap-5 sm:flex"><Link to="/contact">Customer Support</Link><a href="#story">Careers</a><a href="#testimonials">News & Offers</a></div></div></div>
-
-      <header className="sticky top-0 z-40 border-b border-black/5 bg-[#fffaf2]/95 backdrop-blur">
-        <div className="page-shell flex h-19.5 items-center justify-between">
-          <Brand />
-          <nav className="hidden items-center gap-8 text-sm font-bold lg:flex" aria-label="Main navigation"><a className="nav-link active" href="#home">Home</a><a className="nav-link flex items-center gap-1" href="#services">Our Services <ChevronDown size={14} /></a><a className="nav-link" href="#story">About Us</a><a className="nav-link" href="#locations">Our Locations</a><a className="nav-link" href="#impact">Sustainability</a><Link className="nav-link" to="/contact">Contact</Link></nav>
-          <div className="flex items-center gap-2"><button className="icon-button hidden sm:grid" aria-label="Search"><Search size={19} /></button><a href="#locations" className="primary-button hidden sm:flex"><MapPin size={17} fill="currentColor" /> Find a Location</a><button className="icon-button grid lg:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">{menuOpen ? <X size={22} /> : <Menu size={22} />}</button></div>
-        </div>
-        {menuOpen && <nav className="page-shell flex flex-col gap-4 border-t border-black/10 py-5 text-sm font-bold lg:hidden"><Link to="/">Home</Link><a href="#services" onClick={() => setMenuOpen(false)}>Our Services</a><a href="#story" onClick={() => setMenuOpen(false)}>About Us</a><a href="#locations" onClick={() => setMenuOpen(false)}>Our Locations</a><a href="#impact" onClick={() => setMenuOpen(false)}>Sustainability</a><Link to="/contact">Contact</Link></nav>}
-      </header>
+      <SiteHeader page="home" />
 
       <main>
         <section id="home" className="hero-section">
@@ -77,7 +63,7 @@ export default function Home() {
         <section id="locations" className="location-band"><div className="page-shell grid items-center gap-8 py-12 lg:grid-cols-[1.15fr_.85fr]"><div><p className="eyebrow text-[#ffc327]">Find a Chilist</p><h2 className="text-4xl font-black text-white sm:text-5xl">Always Close to You</h2><p className="mt-3 max-w-xl text-white/75">Discover quality food, everyday essentials and dependable service at your nearest location.</p></div><form className="flex rounded-md bg-white p-2" onSubmit={(event) => event.preventDefault()}><label className="sr-only" htmlFor="location">Enter your location</label><input id="location" className="min-w-0 flex-1 px-4 outline-none" placeholder="Enter your city or area" /><button className="primary-button shrink-0"><Search size={17} /><span className="hidden sm:inline">Search</span></button></form></div></section>
       </main>
 
-      <footer id="contact" className="bg-[#2a160c] text-[#f8ead5]"><div className="page-shell grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-[1.3fr_.8fr_.8fr_1fr]"><div><Brand light /><p className="mt-5 max-w-xs text-sm leading-6 text-white/60">Good food. Dependable service. Brighter days for every community we call home.</p><div className="mt-5 flex gap-2"><a className="social" href="#contact" aria-label="Community"><Users size={17} /></a><a className="social" href="mailto:hello@chilist.ng" aria-label="Email"><Mail size={17} /></a></div></div><div className="footer-links"><h3>Quick Links</h3><Link to="/#home">Home</Link><Link to="/#story">About Us</Link><Link to="/#services">Our Services</Link><Link to="/#locations">Our Locations</Link></div><div className="footer-links"><h3>Get in Touch</h3><p>+234 803 123 4567</p><p>hello@chilist.ng</p><p>Warri, Delta State</p></div><div><h3 className="text-sm font-extrabold">Stay Updated</h3><p className="mt-3 text-sm text-white/60">Get our latest updates, offers and more.</p><form className="mt-5 flex overflow-hidden rounded-md bg-white/10" onSubmit={(event) => { event.preventDefault(); setSubscribed(true) }}><input aria-label="Email address" required type="email" placeholder="Your email address" className="min-w-0 flex-1 bg-transparent px-4 py-3 text-xs text-white outline-none placeholder:text-white/45" /><button className="bg-[#ffc327] px-4 text-xs font-extrabold text-[#2a160c]">{subscribed ? 'Done!' : 'Subscribe'}</button></form></div></div><div className="page-shell flex flex-col gap-3 border-t border-white/10 py-5 text-[11px] text-white/45 sm:flex-row sm:justify-between"><p>© 2026 Chilist. All rights reserved.</p><p>Privacy Policy &nbsp;&nbsp; | &nbsp;&nbsp; Terms of Service</p></div></footer>
+      <SiteFooter page="home" />
 
       {storyOpen && <div className="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="story-title" onClick={() => setStoryOpen(false)}><div className="modal" onClick={(event) => event.stopPropagation()}><button className="icon-button absolute right-4 top-4 grid" onClick={() => setStoryOpen(false)} aria-label="Close story"><X size={20} /></button><p className="eyebrow">Our story</p><h2 id="story-title">Built around people.</h2><p>From one neighbourhood stop to a trusted everyday destination, Chilist has always put quality, service and community first.</p><button className="primary-button mt-6" onClick={() => setStoryOpen(false)}>Keep Exploring <ArrowRight size={17} /></button></div></div>}
     </div>
