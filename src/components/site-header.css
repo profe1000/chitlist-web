@@ -1,0 +1,9 @@
+.services-menu { position: relative; }
+.services-dropdown { position: absolute; top: calc(100% - 10px); left: -18px; z-index: 50; display: grid; min-width: 230px; border: 1px solid #eadfce; border-radius: 8px; padding: 8px; background: #fffaf2; box-shadow: 0 16px 36px rgba(67,37,13,.14); opacity: 0; visibility: hidden; transform: translateY(6px); transition: opacity .15s, transform .15s, visibility .15s; }
+.services-menu:hover .services-dropdown,.services-menu:focus-within .services-dropdown,.services-menu.open .services-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.services-dropdown a { display: flex; align-items: center; gap: 10px; border-radius: 6px; padding: 10px 12px; font-size: .86rem; }
+.services-dropdown a:hover,.services-dropdown a.active { background: #fff0d2; }
+.services-dropdown svg { color: #b96809; }
+.services-menu > button { display: flex; align-items: center; gap: 4px; border: 0; background: none; color: inherit; font-weight: 700; }
+.services-menu > button svg { transition: transform .15s; }
+.services-menu:hover > button svg,.services-menu.open > button svg { transform: rotate(180deg); }

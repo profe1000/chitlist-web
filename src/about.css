@@ -10,7 +10,7 @@
   overflow: hidden;
   background:
     linear-gradient(90deg, rgba(38, 14, 3, .97), rgba(53, 25, 9, .7) 46%, rgba(42, 18, 6, .05) 78%),
-    url('https://images.unsplash.com/photo-1527018601619-a508a2be00cd?auto=format&fit=crop&w=2000&q=90') center 57% / cover;
+    url('/images/about-hero-lagos-bridge.jpg') center 57% / cover;
 }
 
 .about-hero::after {
@@ -138,7 +138,7 @@
 
 .about-story-photo {
   min-height: 390px;
-  background: url('https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=1200&q=88') center / cover;
+  background: url('/images/about-story-delta-market.jpg') center / cover;
   box-shadow: 0 18px 45px rgba(62, 33, 12, .14);
 }
 
